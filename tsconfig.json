@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./build",
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["es6", "dom"],
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true
+  },
+  "compileOnSave": false,
+  "exclude": ["node_modules"]
+}

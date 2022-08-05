@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  redis-todo-app:
+    image: redis-todo-app
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    working_dir: /app
+    command: [sh, -c, 'ts-node-dev ./src/server.ts']
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - redisdb
+    ports:
+      - 3000:3000
+    networks:
+      - app
+
+  redisdb:
+    container_name: redisdb
+    image: 'redislabs/redisearch'
+    ports:
+      - "6379:6379"
+    networks:
+      - app
+
+  redis-commander:
+    image: rediscommander/redis-commander
+    restart: always
+    environment:
+      - REDIS_HOSTS=redis:redis:6379
+    depends_on:
+      - redisdb
+    ports:
+      - 8081:8081
+    networks:
+      - app          
+
+networks:
+  app:
